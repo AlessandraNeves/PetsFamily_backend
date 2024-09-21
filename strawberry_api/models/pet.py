@@ -14,7 +14,7 @@ class Pet(Base):
     breed = Column(String(30))
     weight = Column(Float)
     microchip = Column(Integer, unique=True)
-    photo = Column(String())
+    photo = Column(String(5000))
     
         # Criando um requisito de unicidade envolvendo uma par de informações
     __table_args__ = (UniqueConstraint("microchip", name="pet_unique_id"),)

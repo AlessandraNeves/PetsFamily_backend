@@ -66,7 +66,7 @@ class PetQueryInput:
 
 @strawberry.type
 class PetExists:
-    message: str = "Pet de mesmo nome já inserido na base"
+    message: str = "Pet de mesmo microchip já inserido na base"
 
 @strawberry.type
 class PetNotFound:
