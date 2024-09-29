@@ -34,6 +34,9 @@ class Pet:
     weight: float = None
     microchip: int
     photo: str = None
+    adoption: str = None
+    adoption_info: str = None
+
 
     @classmethod
     def marshal(cls, model: models.Pet) -> "Pet":
@@ -46,7 +49,9 @@ class Pet:
             breed=model.breed,
             weight=model.weight,
             microchip=model.microchip,
-            photo=model.photo
+            photo=model.photo,
+            adoption=model.adoption,
+            adoption_info=model.adoption_info
         )
 
 @strawberry.input
@@ -58,7 +63,9 @@ class PetDataInput:
     breed: str = None
     weight: float = None
     microchip: int = None
-    photo:str = None
+    photo: str = None
+    adoption: str = None
+    adoption_info: str = None
 
 @strawberry.input
 class PetQueryInput:
@@ -109,7 +116,7 @@ class Mutation:
 
     @strawberry.field
     async def add_pet(self, name: str, birthday: str, domain: str, gender: str, 
-                      breed: str, weight: float, microchip: int, photo: str) -> PetResponse: 
+                      breed: str, weight: float, microchip: int, photo: str, adoption: str, adoption_info: str) -> PetResponse: 
         async with models.get_session() as session:
 
             sql = select(models.Pet).\
@@ -120,7 +127,8 @@ class Mutation:
                 return PetExists()
 
             db_pet = models.Pet(name=name, birthday=birthday, domain=domain, gender=gender, 
-                                breed=breed, weight=weight, microchip=microchip, photo=photo)
+                                breed=breed, weight=weight, microchip=microchip, photo=photo, 
+                                adoption=adoption, adoption_info=adoption_info)
             session.add(db_pet)
             await session.commit()
 
@@ -145,6 +153,8 @@ class Mutation:
             if edits.weight != None: db_pet_exists.weight = edits.weight
             if edits.microchip != None: db_pet_exists.microchip = edits.microchip
             if edits.photo != None: db_pet_exists.photo = edits.photo
+            if edits.adoption != None: db_pet_exists.adoption = edits.adoption
+            if edits.adoption_info != None: db_pet_exists.adoption_info = edits.adoption_info
             
             await session.commit()
 

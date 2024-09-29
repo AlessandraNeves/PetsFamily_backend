@@ -15,11 +15,13 @@ class Pet(Base):
     weight = Column(Float)
     microchip = Column(Integer, unique=True)
     photo = Column(String(5000))
+    adoption = Column(String(1), nullable=False)
+    adoption_info = Column(String(2000), nullable=False)
     
         # Criando um requisito de unicidade envolvendo uma par de informações
     __table_args__ = (UniqueConstraint("microchip", name="pet_unique_id"),)
 
-    def __init__(self, name:str, birthday:str, domain:str, gender:str, breed:str, weight:float, microchip:int, photo:str):
+    def __init__(self, name:str, birthday:str, domain:str, gender:str, breed:str, weight:float, microchip:int, photo:str, adoption: str, adoption_info: str):
         """
         Cria o cadastro de um animal (Pet)
 
@@ -32,6 +34,8 @@ class Pet(Base):
             weight: peso do animal
             microchip: número do microchip implantado no animal
             photo: foto do animal
+            adoption: indicador de animal para adoção
+            adoption_info: informações sobre o animal para adoção
         """
         self.name = name
         self.birthday = birthday
@@ -41,3 +45,5 @@ class Pet(Base):
         self.weight = weight
         self.microchip = microchip
         self.photo = photo
+        self.adoption = adoption
+        self.adoption_info = adoption_info

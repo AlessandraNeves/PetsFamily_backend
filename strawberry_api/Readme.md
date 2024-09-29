@@ -26,7 +26,7 @@ Para criar:
 py -m venv env
 ```
 
-Para ativar o ambiente virtual (entrar na pasta strawberry_api):
+Para ativar o ambiente virtual (`entrar na pasta strawberry_api`):
 ```
 .\env\scripts\activate
 ```
